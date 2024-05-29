@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Jost", sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100% !important;
+  }
+
+  body {
+    position: relative;
+    visibility: visible;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+  }
+
+  a,
+  button {
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  a:focus {
+    text-decoration: none;
+    outline: 0;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  svg {
+    display: inline;
+  }
+
+  textarea:focus,
+  input:focus {
+    outline: none;
+  }
+
+  .vertical_dash_before::before {
+    position: absolute;
+    top: 50%;
+    content: " ";
+    width: 0.1rem;
+    height: 100%;
+    background: white;
+    transform: translatey(-50%);
+  }
+
+  .break-horizontal::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    left: 0;
+    z-index: 0;
+    height: 0.5px;
+    background: gray;
+    top: 50%;
+    -webkit-transform: translatey(-50%);
+    transform: translatey(-50%);
+  }
+
+  input[type="checkbox"]:checked ~ span {
+    transition: all 1s ease;
+    background: #ee2761; /* Màu của bạn */
+  }
+}
+
+.banner1 {
+  background: url("https://risingtheme.com/html/demo-suruchi-v1/suruchi/assets/img/slider/home1-slider1.png");
+}
+.banner2 {
+  background: url("https://risingtheme.com/html/demo-suruchi-v1/suruchi/assets/img/slider/home1-slider2.png");
+}
+.banner3 {
+  background: url("https://risingtheme.com/html/demo-suruchi-v1/suruchi/assets/img/slider/home1-slider3.png");
+}
+.banner1,
+.banner2,
+.banner3 {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: rgb(255, 255, 255) !important;
+  background: #ee2761 !important;
+  border-radius: 50% !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.5s ease !important;
+  opacity: 0 !important;
+}
+
+.swiper:hover .swiper-button-prev,
+.swiper:hover .swiper-button-next {
+  opacity: 1 !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 1rem !important;
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Ẩn cả nút tăng lẫn nút giảm */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.anticon {
+  display: none !important;
+}
+
+.ant-menu-submenu-title:hover,
+.ant-menu-item:hover {
+  background: #ee2761 !important;
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.ant-drawer-body {
+  padding: 0 !important;
+}
+
+.ant-drawer-content-wrapper {
+  width: 0% !important;
+}
+
+.ant-menu-sub {
+  margin-left: -1rem !important;
+}
