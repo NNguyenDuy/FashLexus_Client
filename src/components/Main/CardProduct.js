@@ -28,7 +28,7 @@ const CardProduct = ({ product }) => {
       </Link>
       <div className="mt-3 flex flex-col gap-2 text-xs text-gray-500 sm:text-sm ">
         <div className="ml-1 flex flex-col gap-2">
-          <span>{product.Category.Name}</span>
+          <span>{product.category_name}</span>
           <h2 className="overflow-hidden overflow-ellipsis whitespace-nowrap text-xs font-bold text-black sm:text-base">
             {product.Name}
           </h2>
