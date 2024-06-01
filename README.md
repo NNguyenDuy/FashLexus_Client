@@ -1,6 +1,6 @@
 # FashLexus_Client
 # Suruchi_Cart_SERN_Stack
-## Because my website uses a free host, we must wait for the server to load.
+## Because my website uses a free host, we must wait for the server to call the API.
 
 Website create with React, Nodes(Express), Mysql, Crawl API with Puppeteer, ORM sequelize
 
