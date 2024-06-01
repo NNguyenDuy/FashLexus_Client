@@ -29,7 +29,7 @@ const DetailProduct = () => {
   return (
     <section>
       {detailProduct.Images && (
-        <div className="my-20 flex flex-wrap justify-center gap-8 lg:flex-nowrap">
+        <div className="flex flex-wrap justify-center gap-8 sm:my-20 lg:flex-nowrap">
           <div className="flex gap-5">
             <ul className="flex flex-col justify-between">
               {JSON.parse(detailProduct.Images)
@@ -51,8 +51,8 @@ const DetailProduct = () => {
               alt=""
             />
           </div>
-          <div className="flex flex-col gap-3 lg:justify-between">
-            <h1 className="text-2xl">{detailProduct?.Name}</h1>
+          <div className="flex w-3/4 flex-col gap-3 lg:w-auto lg:justify-between">
+            <h1 className="text-2xl lg:w-[28rem]">{detailProduct?.Name}</h1>
             <div>
               <span>${detailProduct.Price}</span>
               <span className="m-2 inline-block h-[0.09rem] w-3 bg-bgBlackGray align-middle"></span>
