@@ -51,7 +51,7 @@ const DetailProduct = () => {
               alt=""
             />
           </div>
-          <div className="flex w-3/4 flex-col gap-3 lg:w-auto lg:justify-between">
+          <div className="flex w-3/4 flex-col gap-3 lg:w-[30rem] lg:justify-between">
             <h1 className="text-2xl lg:w-[28rem]">{detailProduct?.Name}</h1>
             <div>
               <span>${detailProduct.Price}</span>
