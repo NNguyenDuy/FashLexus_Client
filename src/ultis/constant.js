@@ -1,7 +1,7 @@
 import icons from "../assets";
 
 export const paths = [
-  { show: false, path: "", value: "HomePage" },
+  { show: false, path: "/*", value: "HomePage" },
   { show: true, path: "", value: "Home" },
   { show: false, path: "login", value: "Login" },
   { show: false, path: "register", value: "Register" },

@@ -97,7 +97,7 @@ const Header = () => {
                 open={open}
               >
                 <div className="px-7 pt-7">
-                  <Link to={paths[0].path}>
+                  <Link to={paths[1].path}>
                     <img
                       src="https://risingtheme.com/html/demo-suruchi-v1/suruchi/assets/img/logo/nav-log.png"
                       alt="Logo"
@@ -113,7 +113,7 @@ const Header = () => {
               </Drawer>
             </div>
             {showNav && <NavBar setShowNav={setShowNav} />}
-            <Link to={paths[0].path}>
+            <Link to={paths[1].path}>
               <img
                 src="https://risingtheme.com/html/demo-suruchi-v1/suruchi/assets/img/logo/nav-log.png"
                 alt="Logo"
