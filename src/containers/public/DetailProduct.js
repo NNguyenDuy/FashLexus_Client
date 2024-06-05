@@ -4,6 +4,7 @@ import icons from "../../assets";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Radio } from "antd";
+import { ProductReviews } from "../../components";
 
 const DetailProduct = () => {
   const dispatch = useDispatch();
@@ -132,6 +133,7 @@ const DetailProduct = () => {
           </div>
         </div>
       )}
+      <ProductReviews productId={params.productId} />
     </section>
   );
 };

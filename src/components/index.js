@@ -6,3 +6,4 @@ export { default as InputAuth } from "./Main/InputAuth";
 export { default as SidebarUser } from "./Main/SidebarUser";
 export { default as CardProduct } from "./Main/CardProduct";
 export { default as ListCart } from "./Main/ListCart";
+export { default as ProductReviews } from "./Main/ProductReviews";
