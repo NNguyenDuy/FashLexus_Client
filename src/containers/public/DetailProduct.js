@@ -133,7 +133,7 @@ const DetailProduct = () => {
           </div>
         </div>
       )}
-      <ProductReviews productId={params.productId} />
+      {/* <ProductReviews productId={params.productId} /> */}
     </section>
   );
 };
