@@ -6,14 +6,14 @@ const onShowSizeChange = (current, pageSize) => {
 };
 
 const ProductReviews = () => (
-  <>
+  <div>
     <Pagination
       showSizeChanger
       onShowSizeChange={onShowSizeChange}
       defaultCurrent={3}
       total={500}
     />
-  </>
+  </div>
 );
 
 export default ProductReviews;

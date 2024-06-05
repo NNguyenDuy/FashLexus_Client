@@ -4,7 +4,7 @@ import icons from "../../assets";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Radio } from "antd";
-import { ProductReviews } from "../../components";
+// import { ProductReviews } from "../../components";
 
 const DetailProduct = () => {
   const dispatch = useDispatch();
