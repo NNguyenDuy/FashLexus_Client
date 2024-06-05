@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 import { Pagination } from "antd";
 
 const onShowSizeChange = (current, pageSize) => {
