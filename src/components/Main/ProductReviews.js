@@ -3,8 +3,13 @@ import { Pagination } from "antd";
 import { apiTotalReviews, apiReviewsProduct } from "../../services";
 import { Rate } from "antd";
 import moment from "moment";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProductReviews = ({ productId }) => {
+  const { userData } = useSelector((state) => state.user);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   const [totalAndRatingReviews, setTotalAndRatingReviews] = useState({
     totalReviews: 0,
     avgRating: 0,
@@ -52,7 +57,10 @@ const ProductReviews = ({ productId }) => {
   };
 
   const handleCreateReview = () => {
-    console.log("please login to comment");
+    if (!isLoggedIn) toast.warning("Please login to comment !");
+    else {
+      console.log(userData);
+    }
   };
 
   return (
@@ -132,7 +140,7 @@ const ProductReviews = ({ productId }) => {
           placeholder="Your comments..."
         ></textarea>
         <button
-          onClick={handleCreateReview}
+          onClick={() => handleCreateReview()}
           className="rounded-sm bg-secondaryColor p-2 px-5 text-base text-white"
         >
           Submit

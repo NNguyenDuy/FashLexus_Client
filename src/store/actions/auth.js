@@ -27,6 +27,10 @@ export const register = (payload) => async (dispatch) => {
   }
 };
 
+export const clearMessage = () => ({
+  type: actionsType.CLEAR_MESSAGE,
+});
+
 export const login = (payload) => async (dispatch) => {
   try {
     const response = await apiLoggin(payload);

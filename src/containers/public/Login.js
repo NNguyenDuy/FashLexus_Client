@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { InputAuth } from "../../components";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import icons from "../../assets";
-import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,8 +16,11 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (isLoggedIn === false && message !== "") toast.error(message);
-  }, [isLoggedIn, message, update]);
+    if (isLoggedIn === false && message !== "") {
+      toast.error(message);
+      dispatch(actions.clearMessage());
+    }
+  }, [isLoggedIn, message, update, dispatch]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -31,24 +32,17 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       dispatch(actions.login(payload));
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  const handleCheckboxChange = (e) => {
-    // Do something when checkbox state changes
+    } catch (error) {}
   };
 
   return (
     <div>
-      <ToastContainer />
       <div className="flex justify-center px-2 lg:p-10 ">
         <div className="rounded-md bg-[#f6f6f6] p-4 shadow-sm md:w-3/6">
           <div className="flex flex-col gap-5 rounded-md bg-white p-6 shadow-sm">
             <h2 className="text-2xl">Login</h2>
             <p className="text-base font-bold text-tGrayColor">
-              Login if you are a returning customer.
+              Login if you area a returning customer.
             </p>
             <InputAuth
               type="email"
@@ -71,7 +65,6 @@ const Login = () => {
                   className="z-10 h-5 w-5 cursor-pointer appearance-none"
                   type="checkbox"
                   name="checkbox"
-                  onChange={handleCheckboxChange} // Add onChange handler
                   checked
                   id=""
                 />
@@ -100,9 +93,15 @@ const Login = () => {
               <span className="z-10 bg-white px-5 text-white">OR</span>
             </div>
             <div className="flex justify-around font-semibold text-white ">
+              {/* <button className="rounded-md bg-[#4867aa] p-2 px-5 hover:bg-secondaryColor sm:px-14 md:px-3 lg:px-9">
+                Facebook
+              </button> */}
               <button className="rounded-md bg-[#e94235] p-2 px-5 hover:bg-secondaryColor sm:px-14 md:px-3 lg:px-20">
                 Google
               </button>
+              {/* <button className="rounded-md bg-[#55adee] p-2 px-5 hover:bg-secondaryColor sm:px-14 md:px-3 lg:px-9">
+                Twitter
+              </button> */}
             </div>
             <p className="text-center text-base font-bold text-tGrayColor hover:text-secondaryColor">
               <Link to={"/register"}>Don't Have an Account? Sign up now</Link>

@@ -29,6 +29,11 @@ const authReducer = (state = initState, action) => {
         update: !state.update,
       };
     }
+    case actionsType.CLEAR_MESSAGE:
+      return {
+        ...state,
+        message: "",
+      };
     case actionsType.LOGOUT: {
       return {
         ...state,

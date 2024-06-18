@@ -1,27 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import icons from "../../assets";
-import { Rate } from "antd";
-import { apiTotalReviews } from "../../services";
 
 const CardProduct = ({ product }) => {
-  const [totalAndRatingReviews, setTotalAndRatingReviews] = useState({
-    totalReviews: 0,
-    avgRating: 0,
-  });
-
-  useEffect(() => {
-    const fetchTotalReviews = async () => {
-      try {
-        const res = await apiTotalReviews(product.id);
-        setTotalAndRatingReviews(res);
-      } catch (error) {
-        console.error("Failed to fetch total reviews", error);
-      }
-    };
-    fetchTotalReviews();
-  }, [product.id]);
-
   return (
     <div className="group/item flex flex-col  ">
       <Link to={`/details/id=${product.id}`} className="relative">
@@ -55,9 +36,6 @@ const CardProduct = ({ product }) => {
             <span className="m-2 inline-block h-[0.09rem] w-3 bg-bgBlackGray align-middle"></span>
             <span className="line-through">${product.Discount}</span>
           </div>
-          <ul className="flex gap-2">
-            <Rate disabled value={totalAndRatingReviews.avgRating} />
-          </ul>
         </div>
         <ul className="flex gap-1 text-xl">
           <li className="rounded-sm border p-1 px-2 transition-all duration-500 hover:bg-secondaryColor hover:text-white">

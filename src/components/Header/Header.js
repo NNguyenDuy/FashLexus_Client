@@ -1,20 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import icons from "../../assets";
 import { Link, useNavigate } from "react-router-dom";
-import { NavMenu, NavPage, Search } from "..";
-import NavBar from "./NavBar";
+import { NavMenu, NavPage, Search, NavBar } from "..";
 import { paths } from "../../ultis/constant";
-import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../store/actions";
+import { useSelector } from "react-redux";
 import { Drawer, Menu } from "antd";
 
 const Header = () => {
-  const dispatch = useDispatch();
   const { categoriesData } = useSelector((state) => state.app);
-
-  useEffect(() => {
-    dispatch(actions.getCategories());
-  }, [dispatch]);
 
   const [fix, setFix] = useState(false);
   const [showNav, setShowNav] = useState(false);
