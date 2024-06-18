@@ -20,7 +20,7 @@ const CardProduct = ({ product }) => {
       }
     };
     fetchTotalReviews();
-  }, [product]);
+  }, [product.id]);
 
   return (
     <div className="group/item flex flex-col  ">
