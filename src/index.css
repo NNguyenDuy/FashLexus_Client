@@ -159,10 +159,11 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.anticon {
+#dropdown-header {
   display: none !important;
 }
 
+/* anticon anticon-down */
 .ant-menu-submenu-title:hover,
 .ant-menu-item:hover {
   background: #ee2761 !important;

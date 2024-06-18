@@ -23,3 +23,41 @@ export const apiGetDetailProduct = async (productId) => {
     throw error?.data;
   }
 };
+
+export const apiGetListCart = async (typeProduct) => {
+  try {
+    const response = await instance({
+      method: "get",
+      url: `/api/product/${typeProduct}-products`,
+    });
+    return response?.data?.products;
+  } catch (error) {
+    throw error?.data;
+  }
+};
+
+export const apiTotalReviews = async (productId) => {
+  try {
+    const response = await instance({
+      method: "get",
+      url: "/api/reviews/getTotalReviewProduct",
+      params: { Product_id: productId },
+    });
+    return response?.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
+
+export const apiReviewsProduct = async (productId, page, pageSize) => {
+  try {
+    const response = await instance({
+      method: "get",
+      url: "/api/reviews/getReviewProduct",
+      params: { Product_id: productId, page, pageSize },
+    });
+    return response?.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};

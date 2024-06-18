@@ -9,7 +9,7 @@ const ItemDetailUser = ({ link, name, boder, icon, logout }) => {
   const navigate = useNavigate();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const active = "text-secondaryColor";
-  const notActive = "text-black";
+  const notActive = "text-black"; 
 
   useEffect(() => {
     if (isLoggedIn === false) navigate("/login");

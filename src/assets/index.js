@@ -32,7 +32,7 @@ const icons = {
   Order: LiaGiftsSolid,
   Voucher: RiCoupon2Line,
   Delivered: AiOutlineDeliveredProcedure,
-  Start: FaStar,
+  Star: FaStar,
   Eye: MdOutlineRemoveRedEye,
 };
 

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import CardProduct from "./CardProduct";
-import axios from "axios";
+import { apiGetListCart } from "../../services";
 
 const ListCart = ({ link }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/api/product/${link}-products`,
-        );
-        setProducts(response?.data?.products);
-      } catch (error) {}
+        const productsData = await apiGetListCart(link);
+        setProducts(productsData);
+      } catch (err) {
+        console.log(err);
+      }
     };
-    fetchData();
+    fetchProducts();
   }, [link]);
 
   return (

@@ -49,7 +49,7 @@ const NavMenu = ({ categories }) => {
                 className="cursor-pointer hover:text-secondaryColor"
               >
                 <Space className="relative">
-                  {value} <DownOutlined />
+                  {value} <DownOutlined id="dropdown-header" />
                   <icons.Down className="absolute right-1 -translate-y-1/2" />
                 </Space>
               </li>

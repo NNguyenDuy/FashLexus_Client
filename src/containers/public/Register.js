@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Banner, InputAuth } from "../../components";
+import { InputAuth } from "../../components";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import icons from "../../assets";
@@ -49,7 +49,6 @@ const Register = () => {
   return (
     <div>
       <ToastContainer />
-      <Banner title={"Register Page"} />
       <div className="flex justify-center px-2 lg:p-10 ">
         <div className=" rounded-md bg-[#f6f6f6] p-4 shadow-sm md:w-3/6">
           <div className="flex flex-col gap-5 rounded-md bg-white p-6 shadow-sm">
