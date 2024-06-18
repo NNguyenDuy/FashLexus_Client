@@ -10,16 +10,15 @@ const CardProduct = ({ product }) => {
     avgRating: 0,
   });
 
-  const fetchTotalReviews = async () => {
-    try {
-      const res = await apiTotalReviews(product.id);
-      setTotalAndRatingReviews(res);
-    } catch (error) {
-      console.error("Failed to fetch total reviews", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchTotalReviews = async () => {
+      try {
+        const res = await apiTotalReviews(product.id);
+        setTotalAndRatingReviews(res);
+      } catch (error) {
+        console.error("Failed to fetch total reviews", error);
+      }
+    };
     fetchTotalReviews();
   }, [product]);
 

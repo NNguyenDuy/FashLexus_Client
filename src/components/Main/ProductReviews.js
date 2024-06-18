@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Pagination } from "antd";
 import { apiTotalReviews, apiReviewsProduct } from "../../services";
 import { Rate } from "antd";
 import moment from "moment";
 
 const ProductReviews = ({ productId }) => {
-  
   const [totalAndRatingReviews, setTotalAndRatingReviews] = useState({
     totalReviews: 0,
     avgRating: 0,
@@ -14,35 +13,46 @@ const ProductReviews = ({ productId }) => {
   const [reviews, setReviews] = useState([]);
   const [valueRate, setValueRate] = useState(3);
 
-  const fetchReviews = async (current, pageSize) => {
-    try {
-      const reviewsPage = await apiReviewsProduct(productId, current, pageSize);
-      setReviews(reviewsPage);
-    } catch (error) {
-      console.error("Failed to fetch reviews", error);
-    }
-  };
+  const fetchReviews = useCallback(
+    async (current, pageSize) => {
+      try {
+        const reviewsPage = await apiReviewsProduct(
+          productId,
+          current,
+          pageSize,
+        );
+        setReviews(reviewsPage);
+      } catch (error) {
+        console.error("Failed to fetch reviews", error);
+      }
+    },
+    [productId],
+  );
 
-  const fetchTotalReviews = async () => {
+  const fetchTotalReviews = useCallback(async () => {
     try {
       const res = await apiTotalReviews(productId);
       setTotalAndRatingReviews(res);
     } catch (error) {
       console.error("Failed to fetch total reviews", error);
     }
-  };
+  }, [productId]);
 
   useEffect(() => {
-    fetchReviews(1, 3);
-    fetchTotalReviews();
-  }, [productId]);
+    const fetchData = async () => {
+      await fetchReviews(1, 3);
+      await fetchTotalReviews();
+    };
+
+    fetchData();
+  }, [fetchReviews, fetchTotalReviews]);
 
   const onChange = (current, pageSize) => {
     fetchReviews(current, pageSize);
   };
 
   const handleCreateReview = () => {
-    console.log("first");
+    console.log("please login to comment");
   };
 
   return (
