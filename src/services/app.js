@@ -61,3 +61,22 @@ export const apiReviewsProduct = async (productId, page, pageSize) => {
     throw error.response?.data || error;
   }
 };
+
+export const createReview = async ({
+  User_id,
+  Product_id,
+  Rating,
+  Title,
+  Content,
+}) => {
+  try {
+    const response = await instance({
+      method: "post",
+      url: "/api/reviews/createReview",
+      params: { User_id, Product_id, Rating, Title, Content },
+    });
+    return response?.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};

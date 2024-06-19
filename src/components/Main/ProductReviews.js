@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Pagination } from "antd";
-import { apiTotalReviews, apiReviewsProduct } from "../../services";
-import { Rate } from "antd";
-import moment from "moment";
+import { Pagination, Rate } from "antd";
 import { useSelector } from "react-redux";
+import moment from "moment";
 import { toast } from "react-toastify";
+import {
+  apiTotalReviews,
+  apiReviewsProduct,
+  createReview,
+} from "../../services";
 
 const ProductReviews = ({ productId }) => {
   const { userData } = useSelector((state) => state.user);
@@ -14,9 +17,16 @@ const ProductReviews = ({ productId }) => {
     totalReviews: 0,
     avgRating: 0,
   });
-
-  const [reviews, setReviews] = useState([]);
+  
   const [valueRate, setValueRate] = useState(3);
+  const [reviews, setReviews] = useState([]);
+  const [review, setReview] = useState({
+    User_id: userData?.id || "",
+    Product_id: productId,
+    Rating: valueRate,
+    Title: "",
+    Content: "",
+  });
 
   const fetchReviews = useCallback(
     async (current, pageSize) => {
@@ -56,11 +66,44 @@ const ProductReviews = ({ productId }) => {
     fetchReviews(current, pageSize);
   };
 
-  const handleCreateReview = () => {
-    if (!isLoggedIn) toast.warning("Please login to comment !");
-    else {
-      console.log(userData);
+  const handleCreateReview = async () => {
+    if (!isLoggedIn) {
+      toast.warning("Please login to comment !");
+    } else {
+      try {
+        await createReview(review);
+        toast.success("Create review success");
+        await fetchReviews(1, 3); // Refresh reviews after submission
+        // Reset the review form
+        setReview({
+          User_id: userData?.id || "",
+          Product_id: productId,
+          Rating: valueRate,
+          Title: "",
+          Content: "",
+        });
+        setValueRate(3); // Reset the rating value
+      } catch (error) {
+        console.error("Failed to create review", error);
+        toast.error("Failed to create review");
+      }
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setReview((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleRateChange = (value) => {
+    setValueRate(value);
+    setReview((prev) => ({
+      ...prev,
+      Rating: value,
+    }));
   };
 
   return (
@@ -100,11 +143,14 @@ const ProductReviews = ({ productId }) => {
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col gap-2">
                     <h1>{item.Fullname}</h1>
-                    <Rate
-                      disabled
-                      allowHalf
-                      value={Math.round(item.Rating * 2) / 2}
-                    />{" "}
+                    <div className="flex items-center gap-6">
+                      <Rate
+                        disabled
+                        allowHalf
+                        value={Math.round(item.Rating * 2) / 2}
+                      />
+                      <h2 className="leading-4 underline">{item.Title}</h2>
+                    </div>
                   </div>
                   <div className="rounded-md border p-2 px-3">
                     {moment(item.createdAt).fromNow()}
@@ -125,22 +171,27 @@ const ProductReviews = ({ productId }) => {
           showSizeChanger={false}
         />
       </div>
-      <div
-        id="comments"
-        className=" grid grid-flow-row place-items-start gap-4"
-      >
+      <div id="comments" className="grid grid-flow-row place-items-start gap-4">
         <div className="flex flex-col justify-center gap-4">
           <h1 className="text-xl">Add a review</h1>
-          <Rate onChange={setValueRate} value={valueRate} />
+          <Rate onChange={handleRateChange} value={valueRate} />
         </div>
         <textarea
-          name=""
-          id=""
-          className="h-36 w-full rounded-md border p-3 transition-all duration-500 focus:border-secondaryColor"
+          name="Title"
+          value={review.Title}
+          onChange={handleChange}
+          className="w-full rounded-md border border-slate-300 p-3 transition-all duration-500 focus:border-secondaryColor"
+          placeholder="Your title..."
+        ></textarea>
+        <textarea
+          name="Content"
+          value={review.Content}
+          onChange={handleChange}
+          className="h-36 w-full rounded-md border border-slate-300 p-3 transition-all duration-500 focus:border-secondaryColor"
           placeholder="Your comments..."
         ></textarea>
         <button
-          onClick={() => handleCreateReview()}
+          onClick={handleCreateReview}
           className="rounded-sm bg-secondaryColor p-2 px-5 text-base text-white"
         >
           Submit

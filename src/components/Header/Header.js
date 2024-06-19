@@ -186,7 +186,7 @@ const Header = () => {
               />
               <NavPage
                 icon={<icons.User color="#606060" size={23} />}
-                path={"login"}
+                path={"user"}
               />
               <NavPage
                 icon={<icons.Heart color="#606060" size={23} />}

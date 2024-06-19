@@ -28,10 +28,7 @@ const Register = () => {
   }, [isLoggedIn, message, update, dispatch]);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      toast.success(message);
-      navigate("/user");
-    }
+    if (isLoggedIn) navigate("/user");
   }, [isLoggedIn, message, navigate]);
 
   const handleRegister = async () => {
