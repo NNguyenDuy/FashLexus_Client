@@ -17,7 +17,7 @@ const ProductReviews = ({ productId }) => {
     totalReviews: 0,
     avgRating: 0,
   });
-  
+
   const [valueRate, setValueRate] = useState(3);
   const [reviews, setReviews] = useState([]);
   const [review, setReview] = useState({

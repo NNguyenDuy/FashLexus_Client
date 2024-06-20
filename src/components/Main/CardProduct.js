@@ -10,7 +10,6 @@ const CardProduct = ({ product }) => {
           Sale
         </span>
         <img
-          loading="lazy"
           src={
             JSON.parse(product.Images)[0] + "?$n_750w$&wid=750&fit=constrain"
           }

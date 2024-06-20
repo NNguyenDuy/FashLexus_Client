@@ -40,3 +40,5 @@ export const getDetailProduct = (payload) => async (dispatch) => {
     });
   }
 };
+
+

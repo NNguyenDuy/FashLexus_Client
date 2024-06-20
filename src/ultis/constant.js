@@ -5,10 +5,9 @@ export const paths = [
   { show: true, path: "", value: "Home" },
   { show: false, path: "login", value: "Login" },
   { show: false, path: "register", value: "Register" },
-  { show: true, path: "shop", value: "Shop" },
-  { show: true, path: "categories/:category", value: "Categories" },
   { show: true, path: "contact", value: "Contact" },
   { show: true, path: "blog", value: "Blog" },
+  { show: true, path: "categories/:category", value: "Categories" },
   {
     show: false,
     path: "details/:productId",
@@ -47,4 +46,11 @@ export const pathsUser = [
     path: "voucher",
     value: "Voucher",
   },
+];
+
+export const valueSortProduct = [
+  { value: "latest", label: "Sort by latest" },
+  { value: "popularity", label: "Sort by popularity" },
+  { value: "newness", label: "Sort by newness" },
+  { value: "rating", label: "Sort by rating" },
 ];

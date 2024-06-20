@@ -5,3 +5,7 @@ export const getFirstString = (username) => {
     .join("");
   return val;
 };
+
+export const getCategory = (pathLocation) => {
+  return pathLocation.split("/")[2];
+};

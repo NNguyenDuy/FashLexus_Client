@@ -80,3 +80,21 @@ export const createReview = async ({
     throw error.response?.data || error;
   }
 };
+
+export const apiProductsCategory = async ({
+  category,
+  searchName,
+  minPrice,
+  maxPrice,
+}) => {
+  try {
+    const response = await instance({
+      method: "get",
+      url: "/api/product/category",
+      params: { category, searchName, minPrice, maxPrice },
+    });
+    return response?.data?.products;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
