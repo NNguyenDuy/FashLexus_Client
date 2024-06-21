@@ -113,7 +113,6 @@ export const apiProductsCategory = async ({
       url: "/api/product/category",
       params: { category, searchName, minPrice, maxPrice, offset, pageSize },
     });
-    console.log(response?.data?.products)
     return response?.data?.products;
   } catch (error) {
     throw error.response?.data || error;

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getCategory } from "../../ultis/common";
 import { Select, Pagination } from "antd";
-import { valueSortProduct } from "../../ultis/constant";
 import icons from "../../assets";
 import * as actions from "../../store/actions";
 import { CardProduct } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
+import { valueSortProduct } from "../../ultis/constant";
 
 const Categories = () => {
   const location = useLocation();
@@ -34,7 +34,6 @@ const Categories = () => {
     setInfoProduct((prev) => ({
       ...prev,
       offset: 0,
-      pageSize: 12,
       category: getCategory(location.pathname),
     }));
   }, [location.pathname]);
@@ -53,18 +52,17 @@ const Categories = () => {
     dispatch(actions.getTotalProductsCategory(infoProduct));
   }, [infoProduct, dispatch]);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-  const onChange = (current, pageSize) => {
+  const onChange = (page, pageSize) => {
     setInfoProduct((prev) => ({
       ...prev,
-      offset: (current - 1) * pageSize,
+      offset: (page - 1) * pageSize,
       pageSize,
     }));
   };
 
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
   return (
     <div className="m-3 xl:m-10">
       <div className="m-5 flex flex-col items-start justify-between gap-4 text-sm sm:flex-row sm:items-center">
@@ -96,6 +94,20 @@ const Categories = () => {
             <icons.Search size={20} />
           </button>
         </div>
+        {totalProductsCategory ? (
+          <div className="text-base font-medium text-slate-600">
+            Showing {infoProduct.offset + 1} -{" "}
+            {Math.min(
+              infoProduct.offset + infoProduct.pageSize,
+              totalProductsCategory,
+            )}{" "}
+            of {totalProductsCategory} results
+          </div>
+        ) : (
+          <div className="text-base font-medium text-slate-600">
+            Showing 0 results
+          </div>
+        )}
       </div>
       <div className="mt-10 flex gap-5">
         <div className="hidden h-56 flex-col items-start gap-3 p-5 shadow-xl lg:flex">
@@ -152,7 +164,7 @@ const Categories = () => {
           <div className="m-10 flex justify-center">
             <Pagination
               onChange={onChange}
-              pageSize={12}
+              pageSize={infoProduct.pageSize}
               defaultCurrent={1}
               total={totalProductsCategory}
               showSizeChanger={false}
