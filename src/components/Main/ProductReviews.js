@@ -1,25 +1,18 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Pagination, Rate } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
+import * as actions from "../../store/actions";
 import { toast } from "react-toastify";
-import {
-  apiTotalReviews,
-  apiReviewsProduct,
-  createReview,
-} from "../../services";
+import { createReview } from "../../services";
 
 const ProductReviews = ({ productId }) => {
+  const dispatch = useDispatch();
+  const { infoReviewProduct, reviews } = useSelector((state) => state.app);
   const { userData } = useSelector((state) => state.user);
   const { isLoggedIn } = useSelector((state) => state.auth);
-
-  const [totalAndRatingReviews, setTotalAndRatingReviews] = useState({
-    totalReviews: 0,
-    avgRating: 0,
-  });
-
   const [valueRate, setValueRate] = useState(3);
-  const [reviews, setReviews] = useState([]);
+
   const [review, setReview] = useState({
     User_id: userData?.id || "",
     Product_id: productId,
@@ -28,42 +21,13 @@ const ProductReviews = ({ productId }) => {
     Content: "",
   });
 
-  const fetchReviews = useCallback(
-    async (current, pageSize) => {
-      try {
-        const reviewsPage = await apiReviewsProduct(
-          productId,
-          current,
-          pageSize,
-        );
-        setReviews(reviewsPage);
-      } catch (error) {
-        console.error("Failed to fetch reviews", error);
-      }
-    },
-    [productId],
-  );
-
-  const fetchTotalReviews = useCallback(async () => {
-    try {
-      const res = await apiTotalReviews(productId);
-      setTotalAndRatingReviews(res);
-    } catch (error) {
-      console.error("Failed to fetch total reviews", error);
-    }
-  }, [productId]);
-
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchReviews(1, 3);
-      await fetchTotalReviews();
-    };
-
-    fetchData();
-  }, [fetchReviews, fetchTotalReviews]);
-
+    dispatch(actions.getInfoReviews(productId));
+    dispatch(actions.getReviewsProduct({ productId, page: 1, pageSize: 3 }));
+  }, [dispatch, productId]);
+  
   const onChange = (current, pageSize) => {
-    fetchReviews(current, pageSize);
+    dispatch(actions.getReviewsProduct({ productId, page: current, pageSize }));
   };
 
   const handleCreateReview = async () => {
@@ -73,8 +37,9 @@ const ProductReviews = ({ productId }) => {
       try {
         await createReview(review);
         toast.success("Create review success");
-        await fetchReviews(1, 3); // Refresh reviews after submission
-        // Reset the review form
+        dispatch(
+          actions.getReviewsProduct({ productId, page: 1, pageSize: 3 }),
+        );
         setReview({
           User_id: userData?.id || "",
           Product_id: productId,
@@ -82,7 +47,7 @@ const ProductReviews = ({ productId }) => {
           Title: "",
           Content: "",
         });
-        setValueRate(3); // Reset the rating value
+        setValueRate(3);
       } catch (error) {
         console.error("Failed to create review", error);
         toast.error("Failed to create review");
@@ -92,6 +57,7 @@ const ProductReviews = ({ productId }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name);
     setReview((prev) => ({
       ...prev,
       [name]: value,
@@ -115,9 +81,9 @@ const ProductReviews = ({ productId }) => {
             <Rate
               disabled
               allowHalf
-              value={Math.round(totalAndRatingReviews.avgRating * 2) / 2}
+              value={Math.round(infoReviewProduct.avgRating * 2) / 2}
             />
-            <span>based on {totalAndRatingReviews.totalReviews} reviews</span>
+            <span>based on {infoReviewProduct.totalReviews} reviews</span>
           </span>
         </div>
 
@@ -167,7 +133,7 @@ const ProductReviews = ({ productId }) => {
           onChange={onChange}
           pageSize={3}
           defaultCurrent={1}
-          total={totalAndRatingReviews.totalReviews}
+          total={infoReviewProduct.totalReviews}
           showSizeChanger={false}
         />
       </div>

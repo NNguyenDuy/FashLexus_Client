@@ -4,12 +4,15 @@ import { getCategory } from "../../ultis/common";
 import { Select } from "antd";
 import { valueSortProduct } from "../../ultis/constant";
 import icons from "../../assets";
-import { apiProductsCategory } from "../../services";
+import * as actions from "../../store/actions";
 import { CardProduct } from "../../components";
+import { useSelector, useDispatch } from "react-redux";
 
 const Categories = () => {
   const location = useLocation();
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const { productsCategory } = useSelector((state) => state.app);
+
   const [valueFound, setValueFound] = useState({
     searchName: null,
     minPrice: null,
@@ -36,24 +39,11 @@ const Categories = () => {
       minPrice: valueFound.minPrice,
       maxPrice: valueFound.maxPrice,
     }));
-    setValueFound({
-      searchName: "",
-      minPrice: "",
-      maxPrice: "",
-    });
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const getProducts = await apiProductsCategory(infoProduct);
-        setProducts(getProducts);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProducts();
-  }, [infoProduct]);
+    dispatch(actions.getProductsCategory(infoProduct));
+  }, [infoProduct, dispatch]);
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
@@ -139,7 +129,7 @@ const Categories = () => {
         </div>
         <div className="p-5">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-            {products?.map((product) => (
+            {productsCategory?.map((product) => (
               <CardProduct key={product.id} product={product} />
             ))}
           </div>

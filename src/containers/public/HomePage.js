@@ -4,10 +4,6 @@ import { Banner, ListCart } from "../../components";
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("featured");
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
-
   return (
     <main>
       <section>
@@ -25,19 +21,19 @@ const HomePage = () => {
         <ul className="mb-4 ml-6 flex gap-3 text-lg font-semibold md:gap-9">
           <li
             className={`cursor-pointer ${selectedCategory === "featured" && "text-secondaryColor"}`}
-            onClick={() => handleCategoryClick("featured")}
+            onClick={() => setSelectedCategory("featured")}
           >
             Featured
           </li>
           <li
             className={`cursor-pointer ${selectedCategory === "trending" && "text-secondaryColor"}`}
-            onClick={() => handleCategoryClick("trending")}
+            onClick={() => setSelectedCategory("trending")}
           >
             Trending
           </li>
           <li
             className={`cursor-pointer ${selectedCategory === "new-arrival" && "text-secondaryColor"}`}
-            onClick={() => handleCategoryClick("new-arrival")}
+            onClick={() => setSelectedCategory("new-arrival")}
           >
             New Arrival
           </li>

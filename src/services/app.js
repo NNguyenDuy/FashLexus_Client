@@ -49,7 +49,7 @@ export const apiTotalReviews = async (productId) => {
   }
 };
 
-export const apiReviewsProduct = async (productId, page, pageSize) => {
+export const apiReviewsProduct = async ({ productId, page, pageSize }) => {
   try {
     const response = await instance({
       method: "get",

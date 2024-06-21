@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CardProduct from "./CardProduct";
-import { apiGetListCart } from "../../services";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../store/actions";
 
 const ListCart = ({ link }) => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const { productListCart } = useSelector((state) => state.app);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const productsData = await apiGetListCart(link);
-        setProducts(productsData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchProducts();
-  }, [link]);
+    dispatch(actions.getProductListCart(link));
+  }, [link, dispatch]);
 
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {products?.map((product) => (
+      {productListCart?.map((product) => (
         <CardProduct key={product.id} product={product} />
       ))}
     </div>
