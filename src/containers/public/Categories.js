@@ -26,13 +26,15 @@ const Categories = () => {
     searchName: null,
     minPrice: null,
     maxPrice: null,
-    offset: 1,
-    pageSize: 10,
+    offset: 0,
+    pageSize: 12,
   });
 
   useEffect(() => {
     setInfoProduct((prev) => ({
       ...prev,
+      offset: 0,
+      pageSize: 12,
       category: getCategory(location.pathname),
     }));
   }, [location.pathname]);
@@ -150,7 +152,7 @@ const Categories = () => {
           <div className="m-10 flex justify-center">
             <Pagination
               onChange={onChange}
-              pageSize={10}
+              pageSize={12}
               defaultCurrent={1}
               total={totalProductsCategory}
               showSizeChanger={false}
