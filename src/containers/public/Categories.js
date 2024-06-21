@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getCategory } from "../../ultis/common";
-import { Select } from "antd";
+import { Select, Pagination } from "antd";
 import { valueSortProduct } from "../../ultis/constant";
 import icons from "../../assets";
 import * as actions from "../../store/actions";
@@ -11,18 +11,23 @@ import { useSelector, useDispatch } from "react-redux";
 const Categories = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { productsCategory } = useSelector((state) => state.app);
+  const { productsCategory, totalProductsCategory } = useSelector(
+    (state) => state.app,
+  );
 
   const [valueFound, setValueFound] = useState({
     searchName: null,
     minPrice: null,
     maxPrice: null,
   });
+
   const [infoProduct, setInfoProduct] = useState({
     category: null,
     searchName: null,
     minPrice: null,
     maxPrice: null,
+    offset: 1,
+    pageSize: 10,
   });
 
   useEffect(() => {
@@ -43,10 +48,19 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch(actions.getProductsCategory(infoProduct));
+    dispatch(actions.getTotalProductsCategory(infoProduct));
   }, [infoProduct, dispatch]);
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+  };
+
+  const onChange = (current, pageSize) => {
+    setInfoProduct((prev) => ({
+      ...prev,
+      offset: (current - 1) * pageSize,
+      pageSize,
+    }));
   };
 
   return (
@@ -132,6 +146,15 @@ const Categories = () => {
             {productsCategory?.map((product) => (
               <CardProduct key={product.id} product={product} />
             ))}
+          </div>
+          <div className="m-10 flex justify-center">
+            <Pagination
+              onChange={onChange}
+              pageSize={10}
+              defaultCurrent={1}
+              total={totalProductsCategory}
+              showSizeChanger={false}
+            />
           </div>
         </div>
       </div>

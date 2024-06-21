@@ -10,6 +10,7 @@ const initState = {
   },
   reviews: [],
   productsCategory: [],
+  totalProductsCategory: null,
 };
 
 const appReducer = (state = initState, action) => {
@@ -43,6 +44,11 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         productsCategory: action.data || [],
+      };
+    case actionsType.GET_TOTAL_PRODUCT_CATEGORY:
+      return {
+        ...state,
+        totalProductsCategory: action.data || null,
       };
     default:
       return state;

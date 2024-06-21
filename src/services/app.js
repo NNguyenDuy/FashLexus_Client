@@ -81,7 +81,7 @@ export const createReview = async ({
   }
 };
 
-export const apiProductsCategory = async ({
+export const apiTotalProductsCategory = async ({
   category,
   searchName,
   minPrice,
@@ -90,9 +90,30 @@ export const apiProductsCategory = async ({
   try {
     const response = await instance({
       method: "get",
-      url: "/api/product/category",
+      url: "/api/product/categoryTotal",
       params: { category, searchName, minPrice, maxPrice },
     });
+    return response?.data?.total;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
+
+export const apiProductsCategory = async ({
+  category,
+  searchName,
+  minPrice,
+  maxPrice,
+  offset,
+  pageSize,
+}) => {
+  try {
+    const response = await instance({
+      method: "get",
+      url: "/api/product/category",
+      params: { category, searchName, minPrice, maxPrice, offset, pageSize },
+    });
+    console.log(response?.data?.products)
     return response?.data?.products;
   } catch (error) {
     throw error.response?.data || error;

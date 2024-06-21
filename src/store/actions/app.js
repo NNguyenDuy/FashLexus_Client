@@ -6,6 +6,7 @@ import {
   apiTotalReviews,
   apiReviewsProduct,
   apiProductsCategory,
+  apiTotalProductsCategory,
 } from "../../services";
 
 export const getCategories = () => async (dispatch) => {
@@ -103,6 +104,21 @@ export const getProductsCategory = (payload) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionsType.GET_PRODUCT_CATEGORY,
+      data: null,
+    });
+  }
+};
+
+export const getTotalProductsCategory = (payload) => async (dispatch) => {
+  try {
+    const total = await apiTotalProductsCategory(payload);
+    dispatch({
+      type: actionsType.GET_TOTAL_PRODUCT_CATEGORY,
+      data: total,
+    });
+  } catch (error) {
+    dispatch({
+      type: actionsType.GET_TOTAL_PRODUCT_CATEGORY,
       data: null,
     });
   }
