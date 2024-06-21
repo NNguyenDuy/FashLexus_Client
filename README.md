@@ -1,54 +1,19 @@
 # FashLexus_Client
-# Suruchi_Cart_SERN_Stack
-## Because my website uses a free host, we must wait for the server to call the API.
 
-Website create with React, Nodes(Express), Mysql, Crawl API with Puppeteer, ORM sequelize
+## Overview
 
-## React
+This project is a client-side application developed using React. It utilizes various modern libraries and tools to enhance web development efficiency and user experience.
 
-### Use package:
+## Features
 
-    - Tailwind [https://tailwindcss.com/docs/guides/create-react-app]
-    - axios
-    - react-icons
-    - react-redux
-    - react-router-dom
-    - redux
-    - redux-persist
-    - redux-thunk
-    - sweetalert2
-    - antd
+- **Authentication**: Implemented using JWT (JSON Web Tokens) for secure user authentication.
+- **State Management**: Utilizes Redux along with Redux Thunk middleware for managing global application state.
+- **UI Components**: Uses Ant Design (`antd`) for a rich set of UI components and styles.
+- **API Communication**: Utilizes `Axios` for handling RESTful API communications.
+- **Routing**: `React Router DOM` manages client-side routing, enabling navigation within the application.
+- **Notifications**: `React Toastify` is integrated to display non-intrusive toast notifications to users.
+- **Data Persistence**: `Redux Persist` ensures persistent storage of Redux state in local storage.
 
-    -> npx create-react-app
-    -> npm i axios react-icons react-redux react-router-dom redux redux-persist redux-thunk sweetalert2 thunk
-    -> npx sequelize-cli init #install after connect Database
+## ERD Diagram
 
-## Nodejs
-
-### Use package:
-
-    - bcryptjs
-    - cors
-    - dotenv
-    - express
-    - jsonwebtoken
-    - mysql2
-    - nodemon
-    - sequelize
-    - sequelize-cli
-    - uuid
-
-    -> npm init -y
-    -> npm i bcryptjs cors dotenv express jsonwebtoken mysql2 nodemon sequelize sequelize-cli uuid @babel/core @babel/node @babel/preset-env --save-dev
-
-    "start": "nodemon --exec babel-node server.js",
-
-## Mysql and ORM
-
-### Use package:
-
-    - Sequelize
-    - Sequelize-cli
-
-    -> Link ERD: https://drawsql.app/teams/duy-5/diagrams/fashlexus
-
+- [ERD Diagram Link](https://drawsql.app/teams/duy-5/diagrams/fashlexus)
