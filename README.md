@@ -1,5 +1,7 @@
 # FashLexus_Client
 
+# FashLexus_Server: https://github.com/NNguyenDuy/FashLexus_Server
+
 ## Overview
 
 This project is a client-side application developed using React. It utilizes various modern libraries and tools to enhance web development efficiency and user experience.
