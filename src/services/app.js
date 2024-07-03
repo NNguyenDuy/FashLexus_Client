@@ -118,3 +118,16 @@ export const apiProductsCategory = async ({
     throw error.response?.data || error;
   }
 };
+
+export const apiGetSearch = async (valueSearch) => {
+  try {
+    const response = await instance({
+      method: "get",
+      url: "/api/app/search",
+      params: { valueSearch },
+    });
+    return response?.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};

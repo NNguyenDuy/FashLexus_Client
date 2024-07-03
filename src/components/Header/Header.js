@@ -86,7 +86,7 @@ const Header = () => {
                 placement={"left"}
                 closable={false}
                 onClose={onClose}
-                className="!w-56 md:!w-80"
+                width={300}
                 open={open}
               >
                 <div className="px-7 pt-7">
@@ -112,8 +112,8 @@ const Header = () => {
                 alt="Logo"
               />
             </Link>
-            <div className="hidden lg:block">
-              <Search />
+            <div className="hidden lg:block lg:w-96">
+              <Search responsive={true} />
             </div>
             <div className="flex gap-5 ">
               <NavPage
@@ -124,7 +124,7 @@ const Header = () => {
               <NavPage
                 icon={<icons.Heart color="#606060" size={23} />}
                 name={"Wish list"}
-                path={"wishlist"}
+                path={"user/wishlist"}
                 count={true}
                 responsive={true}
               />
@@ -133,7 +133,7 @@ const Header = () => {
                   <icons.Cart color="#606060" strokeWidth={0.3} size={23} />
                 }
                 name={"My Cart"}
-                path={"user/cart"}
+                path={null}
                 count={true}
               />
             </div>
@@ -147,7 +147,7 @@ const Header = () => {
                 placement={"left"}
                 closable={false}
                 onClose={onClose}
-                className="!w-56 md:!w-80"
+                width={300}
                 open={open}
               >
                 <div className="px-7 pt-7">
@@ -173,7 +173,7 @@ const Header = () => {
                 alt="Logo"
               />
             </Link>
-            <div className="hidden lg:block ">
+            <div className="hidden lg:block">
               <NavMenu categories={categoriesData} />
             </div>
             <div className="flex gap-5 ">
@@ -190,7 +190,7 @@ const Header = () => {
               />
               <NavPage
                 icon={<icons.Heart color="#606060" size={23} />}
-                path={"wishlist"}
+                path={"user/wishlist"}
                 count={true}
                 responsive={true}
               />
@@ -198,7 +198,7 @@ const Header = () => {
                 icon={
                   <icons.Cart color="#606060" strokeWidth={0.3} size={23} />
                 }
-                path={"user/cart"}
+                path={null}
                 count={true}
               />
             </div>

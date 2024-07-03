@@ -25,7 +25,7 @@ const ProductReviews = ({ productId }) => {
     dispatch(actions.getInfoReviews(productId));
     dispatch(actions.getReviewsProduct({ productId, page: 1, pageSize: 3 }));
   }, [dispatch, productId]);
-  
+
   const onChange = (current, pageSize) => {
     dispatch(actions.getReviewsProduct({ productId, page: current, pageSize }));
   };
@@ -103,19 +103,19 @@ const ProductReviews = ({ productId }) => {
                 src="https://scontent-hkg4-1.xx.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dLKpxagQdsAQ7kNvgElr4lE&_nc_ht=scontent-hkg4-1.xx&oh=00_AYALHVOpKaL191QYj3Zhf3aGXAHO7uoY_VTpKBI5PF5p4w&oe=6697A338"
                 alt="avatar"
                 loading="lazy"
-                className="w-20 rounded-full"
+                className="w-24 rounded-full"
               />
-              <div className="flex w-full flex-col gap-1">
+              <div className="ml-4 mt-5 flex w-full flex-col gap-1">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col gap-2">
                     <h1>{item.Fullname}</h1>
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-8">
                       <Rate
                         disabled
                         allowHalf
                         value={Math.round(item.Rating * 2) / 2}
                       />
-                      <h2 className="leading-4 underline">{item.Title}</h2>
+                      <div className="leading-4">{item.Title}</div>
                     </div>
                   </div>
                   <div className="rounded-md border p-2 px-3">

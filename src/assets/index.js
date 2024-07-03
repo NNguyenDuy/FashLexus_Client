@@ -12,6 +12,7 @@ import { LiaGiftsSolid } from "react-icons/lia";
 import { RiCoupon2Line } from "react-icons/ri";
 import { AiOutlineDeliveredProcedure } from "react-icons/ai";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { GiClothes } from "react-icons/gi";
 
 const icons = {
   Bus: TbBus,
@@ -34,6 +35,7 @@ const icons = {
   Delivered: AiOutlineDeliveredProcedure,
   Star: FaStar,
   Eye: MdOutlineRemoveRedEye,
+  Clothes: GiClothes,
 };
 
 export default icons;

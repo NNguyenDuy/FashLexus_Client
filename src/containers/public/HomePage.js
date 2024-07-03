@@ -40,7 +40,6 @@ const HomePage = () => {
         </ul>
         <ListCart link={selectedCategory} />
       </section>
-      <section className="h-72">3</section>
     </main>
   );
 };
