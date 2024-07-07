@@ -9,3 +9,5 @@ export { default as CardProduct } from "./Main/CardProduct";
 export { default as ListCart } from "./Main/ListCart";
 export { default as ProductReviews } from "./Main/ProductReviews";
 export { default as Loading } from "./Main/Loading";
+export { default as MyMap } from "./Main/MyMap";
+export { default as ChangePassword } from "./Main/ChangePassword";

@@ -73,7 +73,7 @@ export const createReview = async ({
     const response = await instance({
       method: "post",
       url: "/api/reviews/createReview",
-      params: { User_id, Product_id, Rating, Title, Content },
+      data: { User_id, Product_id, Rating, Title, Content },
     });
     return response?.data;
   } catch (error) {
@@ -125,6 +125,24 @@ export const apiGetSearch = async (valueSearch) => {
       method: "get",
       url: "/api/app/search",
       params: { valueSearch },
+    });
+    return response?.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
+
+export const apiUpdateInfoUser = async ({
+  id,
+  Address,
+  Fullname,
+  Phone_number,
+}) => {
+  try {
+    const response = await instance({
+      method: "put",
+      url: "/api/app/updateInfo",
+      data: { id, Address, Fullname, Phone_number },
     });
     return response?.data;
   } catch (error) {

@@ -5,12 +5,12 @@ import * as actions from "../actions";
 export const getUser = () => async (dispatch) => {
   try {
     const response = await apiGetUser();
-    const { user, error, message } = response;
+    const { userData, error, message } = response;
     if (error === 401 || error === 403) dispatch(actions.Logout());
     if (error === 1)
       dispatch({
         type: actionsType.GET_USER,
-        data: user,
+        data: userData,
         message: message,
       });
     else

@@ -57,7 +57,6 @@ const ProductReviews = ({ productId }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
     setReview((prev) => ({
       ...prev,
       [name]: value,

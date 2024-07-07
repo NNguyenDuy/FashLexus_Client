@@ -21,8 +21,8 @@ const SidebarUser = () => {
   }, [userData?.Fullname, dispatch, navigate]);
 
   return (
-    <div className="col-span-1 hidden md:block">
-      <div className="flex items-center gap-5 rounded-tl-lg bg-white py-10 shadow-sm">
+    <div className="col-span-3 flex justify-between gap-3 md:col-span-1 md:flex-col">
+      <div className="flex w-full items-center gap-5 rounded-tl-lg bg-white py-10 shadow-sm">
         <Link
           to={"*"}
           className="-ml-4 flex h-24 w-24 items-center justify-center rounded-full bg-bgBlackGray text-4xl font-bold text-white"
@@ -34,12 +34,13 @@ const SidebarUser = () => {
           <p className="font-bold">{username}</p>
         </div>
       </div>
-      <div className="mt-2 rounded-bl-lg bg-white shadow-md">
+      <div className="w-full rounded-bl-lg bg-white shadow-md">
         <ul className="flex flex-col justify-center">
-          {pathsUser.map((item) => {
+          {pathsUser.map((item, index) => {
             return (
               item?.show && (
                 <ItemDetailUser
+                  key={index}
                   border={true}
                   icon={item.icon}
                   name={item.value}
