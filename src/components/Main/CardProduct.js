@@ -38,7 +38,7 @@ const CardProduct = ({ product }) => {
           </div>
         </div>
         <ul className="flex gap-1 text-xl">
-          <Link to={"user/cart"}>
+          <Link to={`/details/id=${product.id}`}>
             <li className="cursor-pointer select-none rounded-sm border p-1 px-2 transition-all duration-500 hover:bg-secondaryColor hover:text-white">
               <icons.Cart />
               <span className="ml-1 hidden  text-sm sm:inline">
