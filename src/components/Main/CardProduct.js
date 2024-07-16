@@ -1,26 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import icons from "../../assets";
-import { insertCart } from "../../services";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
 const CardProduct = ({ product }) => {
-  const { userData } = useSelector((state) => state.user);
-
-  const handleInsertCart = async () => {
-    try {
-      const insert = await insertCart(
-        userData?.id,
-        product.id,
-        1,
-        JSON.parse(product.Colors)[0],
-        JSON.parse(product.Sizes)[1],
-      );
-      toast.success(insert?.message);
-    } catch (error) {}
-  };
-
   return (
     <div className="group/item flex flex-col  ">
       <Link to={`/details/id=${product.id}`} className="relative">
@@ -56,15 +38,14 @@ const CardProduct = ({ product }) => {
           </div>
         </div>
         <ul className="flex gap-1 text-xl">
-          <li
-            className="cursor-pointer select-none rounded-sm border p-1 px-2 transition-all duration-500 hover:bg-secondaryColor hover:text-white"
-            onClick={handleInsertCart}
-          >
-            <icons.Cart />
-            <span className="ml-1 hidden  text-sm sm:inline">
-              + Add to cart
-            </span>
-          </li>
+          <Link to={"user/cart"}>
+            <li className="cursor-pointer select-none rounded-sm border p-1 px-2 transition-all duration-500 hover:bg-secondaryColor hover:text-white">
+              <icons.Cart />
+              <span className="ml-1 hidden  text-sm sm:inline">
+                + Add to cart
+              </span>
+            </li>
+          </Link>
           <li className="rounded-sm border p-1 px-2 transition-all duration-500 hover:bg-secondaryColor hover:text-white">
             <Link to={"user/wishlist"}>
               <icons.Heart />
