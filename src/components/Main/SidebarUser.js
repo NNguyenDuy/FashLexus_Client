@@ -21,7 +21,7 @@ const SidebarUser = () => {
   }, [userData?.Fullname, dispatch, navigate]);
 
   return (
-    <div className="col-span-3 flex justify-between gap-3 md:col-span-1 md:flex-col">
+    <div className="flex w-full justify-between gap-3 md:w-60 md:flex-col">
       <div className="flex w-full items-center gap-5 rounded-tl-lg bg-white py-10 shadow-sm">
         <Link
           to={"*"}

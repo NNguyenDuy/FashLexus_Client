@@ -1,7 +1,7 @@
 import React from "react";
 
 const Delivered = () => {
-  return <div>Delivered</div>;
+  return <div>Deliver</div>;
 };
 
 export default Delivered;

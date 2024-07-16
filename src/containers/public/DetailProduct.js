@@ -5,6 +5,8 @@ import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Radio } from "antd";
 import { ProductReviews } from "../../components";
+import { toast } from "react-toastify";
+import { insertCart } from "../../services";
 
 const DetailProduct = () => {
   const dispatch = useDispatch();
@@ -12,6 +14,7 @@ const DetailProduct = () => {
   const { detailProduct } = useSelector((state) => state.app);
   const [currentImage, setCurrentImage] = useState(0);
   const [numberProduct, setNumberProduct] = useState(1);
+  const [sizeProduct, setSizeProduct] = useState(null);
 
   const handleDecsProduct = () => {
     if (numberProduct > 1) {
@@ -26,6 +29,21 @@ const DetailProduct = () => {
   useEffect(() => {
     dispatch(actions.getDetailProduct(params.productId));
   }, [params.productId, dispatch]);
+
+  const { userData } = useSelector((state) => state.user);
+
+  const handleInsertCart = async () => {
+    try {
+      const insert = await insertCart(
+        userData?.id,
+        detailProduct.id,
+        numberProduct,
+        JSON.parse(detailProduct.Colors)[0],
+        sizeProduct || JSON.parse(detailProduct.Sizes)[1],
+      );
+      toast.success(insert?.message);
+    } catch (error) {}
+  };
 
   return (
     <section>
@@ -81,10 +99,10 @@ const DetailProduct = () => {
               <div>
                 <h1>Size</h1>
                 <Select
-                  defaultValue={JSON.parse(detailProduct.Size)[0]}
+                  defaultValue={JSON.parse(detailProduct.Sizes)[0]}
                   className="w-60"
-                  onChange={null}
-                  options={JSON.parse(detailProduct.Size).map((value) => ({
+                  onChange={setSizeProduct}
+                  options={JSON.parse(detailProduct.Sizes).map((value) => ({
                     value,
                     label: value,
                   }))}
@@ -112,7 +130,10 @@ const DetailProduct = () => {
                     +
                   </button>
                 </div>
-                <button className="rounded-sm bg-secondaryColor px-5 text-white hover:bg-primaryColor">
+                <button
+                  onClick={handleInsertCart}
+                  className="rounded-sm bg-secondaryColor px-5 text-white hover:bg-primaryColor"
+                >
                   Add To Cart
                 </button>
               </div>

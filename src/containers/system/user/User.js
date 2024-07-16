@@ -5,9 +5,9 @@ import { SidebarUser } from "../../../components";
 const User = () => {
   return (
     <>
-      <div className="grid grid-flow-row items-start gap-2 bg-[#eeeeee]  p-7 md:grid-flow-col lg:px-12">
+      <div className="flex flex-col items-start justify-center gap-2 bg-[#eeeeee] p-7 md:flex-row">
         <SidebarUser />
-        <div className="col-span-3 rounded-r-lg bg-white p-8 shadow-xl">
+        <div className="w-full rounded-r-lg bg-white p-8 shadow-xl lg:w-10/12">
           <Outlet />
         </div>
       </div>
