@@ -36,6 +36,7 @@ const DetailProduct = () => {
     try {
       const insert = await insertCart(
         userData?.id,
+        userData.Cart.Cart_id,
         detailProduct.id,
         numberProduct,
         JSON.parse(detailProduct.Colors)[0],

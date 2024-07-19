@@ -5,6 +5,7 @@ import numeral from "numeral";
 import icons from "../../../assets";
 import { getCartInfo } from "../../../services";
 import { useSelector } from "react-redux";
+import { insertCart } from "../../../services";
 
 const Cart = () => {
   const { userData } = useSelector((state) => state.user);
@@ -19,14 +20,11 @@ const Cart = () => {
           ...item,
           total: item.price * item.quantity,
         }));
-        console.log(data)
         setTotalPrices(
           updatedCartData.reduce((total, item) => total + item.total, 0),
         );
         setCartData(updatedCartData);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
     fetch();
   }, [userData]);
@@ -35,6 +33,22 @@ const Cart = () => {
     setCartData((prevData) =>
       prevData.filter((item) => item.detailProduct.productId !== productId),
     );
+  };
+
+  const handleInsertCart = async (item, typeQuantity) => {
+    try {
+      if (item.quantity > 1) {
+        console.log(item.quantity);
+        const insert = await insertCart(
+          userData?.id,
+          userData.Cart.Cart_id,
+          item.detailProduct.productId,
+          typeQuantity === true ? item.quantity + 1 : item.quantity - 1,
+          item.detailProduct.color,
+          item.detailProduct.size,
+        );
+      }
+    } catch (error) {}
   };
 
   const handleDecreaseQuantity = (key) => {
@@ -115,7 +129,10 @@ const Cart = () => {
       render: (_, record) => (
         <div className="flex items-center rounded-2xl border ">
           <button
-            onClick={() => handleDecreaseQuantity(record.key)}
+            onClick={() => {
+              handleDecreaseQuantity(record.key);
+              handleInsertCart(record, false);
+            }}
             className="rounded-bl-2xl rounded-tl-2xl bg-slate-100 px-3 py-1 text-xl font-bold"
           >
             -
@@ -127,7 +144,10 @@ const Cart = () => {
             readOnly
           />
           <button
-            onClick={() => handleIncreaseQuantity(record.key)}
+            onClick={() => {
+              handleIncreaseQuantity(record.key);
+              handleInsertCart(record, true);
+            }}
             className="rounded-br-2xl rounded-tr-2xl bg-slate-100 px-3 py-1 text-xl font-bold"
           >
             +

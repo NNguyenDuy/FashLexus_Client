@@ -15,6 +15,7 @@ export const getCartInfo = async (User_id) => {
 
 export const insertCart = async (
   User_id,
+  Cart_id,
   Product_id,
   Quantity,
   Color,
@@ -24,7 +25,7 @@ export const insertCart = async (
     const response = await instance({
       method: "post",
       url: "/api/cart/insertCart",
-      data: { User_id, Product_id, Quantity, Color, Size },
+      data: { User_id, Cart_id, Product_id, Quantity, Color, Size },
     });
     return response?.data;
   } catch (error) {

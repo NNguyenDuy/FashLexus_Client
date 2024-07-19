@@ -29,7 +29,7 @@ const Home = () => {
 
   return (
     <div className="">
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
       <Header />
       <Outlet />
     </div>

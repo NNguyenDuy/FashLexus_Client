@@ -133,7 +133,7 @@ const Header = () => {
                   <icons.Cart color="#606060" strokeWidth={0.3} size={23} />
                 }
                 name={"My Cart"}
-                path={null}
+                path={"user/cart"}
                 count={true}
               />
             </div>
@@ -198,7 +198,7 @@ const Header = () => {
                 icon={
                   <icons.Cart color="#606060" strokeWidth={0.3} size={23} />
                 }
-                path={null}
+                path={"user/cart"}
                 count={true}
               />
             </div>

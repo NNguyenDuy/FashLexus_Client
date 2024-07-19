@@ -23,7 +23,10 @@ const Login = () => {
   }, [isLoggedIn, message, update, dispatch]);
 
   useEffect(() => {
-    if (isLoggedIn) navigate("/user");
+    if (isLoggedIn) {
+      toast.success("Login success");
+      navigate("/user");
+    }
   }, [isLoggedIn, message, navigate]);
 
   const handleLogin = async () => {
