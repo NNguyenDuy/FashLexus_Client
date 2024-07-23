@@ -12,19 +12,12 @@ import {
 export const getCategories = () => async (dispatch) => {
   try {
     const response = await apiCategies();
-    const { categories, error, message } = response;
-    if (error === 1)
-      dispatch({
-        type: actionsType.GET_CATEGORIES,
-        data: categories,
-        message: message,
-      });
-    else
-      dispatch({
-        type: actionsType.GET_CATEGORIES,
-        data: null,
-        message: message,
-      });
+    const { categories, message } = response;
+    dispatch({
+      type: actionsType.GET_CATEGORIES,
+      data: categories,
+      message: message,
+    });
   } catch (error) {
     dispatch({
       type: actionsType.GET_CATEGORIES,
