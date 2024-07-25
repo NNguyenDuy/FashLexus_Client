@@ -16,9 +16,9 @@ function App() {
   }, [dispatch, isLoggedIn, userData?.Fullname]);
 
   return (
-    <main className="relative w-full">
+    <div className="relative w-full">
       <RenderRoutes />
-    </main>
+    </div>
   );
 }
 

@@ -31,7 +31,9 @@ const SidebarUser = () => {
         </Link>
         <div>
           <p>Hi,</p>
-          <p className="font-bold">{username}</p>
+          <p className="font-bold" data-id="username">
+            {username}
+          </p>
         </div>
       </div>
       <div className="w-full rounded-bl-lg bg-white shadow-md">
