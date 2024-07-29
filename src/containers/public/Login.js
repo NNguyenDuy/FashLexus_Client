@@ -84,6 +84,7 @@ const Login = () => {
             </div>
             <button
               onClick={handleLogin}
+              data-id="login"
               className="rounded-md bg-secondaryColor p-2 text-lg text-white hover:bg-primaryColor "
             >
               Login

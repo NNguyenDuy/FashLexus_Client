@@ -23,6 +23,7 @@ const Header = () => {
     showNav
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "auto");
+    console.log(showNav);
     return () => {
       window.removeEventListener("scroll", setFixed);
     };
