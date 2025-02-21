@@ -15,17 +15,17 @@ const Home = () => {
     dispatch(actions.getCategories());
   }, [dispatch]);
 
-  if (categoriesData.length === 0) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <PuffLoader
-          size="100px"
-          speedMultiplier="2"
-          color="rgba(238, 39, 97, 0.6)"
-        />
-      </div>
-    );
-  }
+//   if (categoriesData.length === 0) {
+//     return (
+//       <div className="flex h-screen items-center justify-center">
+//         <PuffLoader
+//           size="100px"
+//           speedMultiplier="2"
+//           color="rgba(238, 39, 97, 0.6)"
+//         />
+//       </div>
+//     );
+//   }
 
   return (
     <div className="">
