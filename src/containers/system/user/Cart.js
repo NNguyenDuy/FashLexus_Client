@@ -3,31 +3,31 @@ import { Table } from "antd";
 import { Link } from "react-router-dom";
 import numeral from "numeral";
 import icons from "../../../assets";
-import { getCartInfo } from "../../../services";
-import { useSelector } from "react-redux";
-import { insertCart } from "../../../services";
+import { useSelector, useDispatch } from "react-redux";
+import { getCart as actionGetCart, insertCart as actionInsertCart } from "../../../store/actions";
 
 const Cart = () => {
   const { userData } = useSelector((state) => state.user);
+  const { data: cartDataState, loading: cartLoading } = useSelector((state) => state.cart || { data: [], loading: false });
   const [cartData, setCartData] = useState([]);
   const [totalPrices, setTotalPrices] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        const data = await getCartInfo(userData?.id);
-        const updatedCartData = data.map((item) => ({
-          ...item,
-          total: item.price * item.quantity,
-        }));
-        setTotalPrices(
-          updatedCartData.reduce((total, item) => total + item.total, 0),
-        );
-        setCartData(updatedCartData);
-      } catch (error) {}
-    };
-    fetch();
-  }, [userData]);
+    if (userData?.id) dispatch(actionGetCart(userData.id));
+  }, [userData, dispatch]);
+
+  useEffect(() => {
+    if (cartDataState && cartDataState.length) {
+      const updatedCartData = cartDataState.map((item) => ({
+        ...item,
+        total: item.price * item.quantity,
+      }));
+      setCartData(updatedCartData);
+    } else {
+      setCartData([]);
+    }
+  }, [cartDataState]);
 
   const handleRemoveProduct = (productId) => {
     setCartData((prevData) =>
@@ -37,18 +37,21 @@ const Cart = () => {
 
   const handleInsertCart = async (item, typeQuantity) => {
     try {
-      if (item.quantity > 1) {
-        console.log(item.quantity);
-        const insert = await insertCart(
-          userData?.id,
-          userData.Cart.Cart_id,
-          item.detailProduct.productId,
-          typeQuantity === true ? item.quantity + 1 : item.quantity - 1,
-          item.detailProduct.color,
-          item.detailProduct.size,
+      if (item.quantity > 0) {
+        await dispatch(
+          actionInsertCart(
+            userData?.id,
+            userData?.Cart?.Cart_id,
+            item.detailProduct.productId,
+            typeQuantity === true ? item.quantity + 1 : item.quantity - 1,
+            item.detailProduct.color,
+            item.detailProduct.size,
+          ),
         );
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleDecreaseQuantity = (key) => {

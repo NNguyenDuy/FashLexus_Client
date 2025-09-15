@@ -17,6 +17,10 @@ const actionsType = {
 
   // user
   GET_USER: "GET_USER",
+  // cart
+  CART_LOADING: "CART_LOADING",
+  GET_CART: "GET_CART",
+  CART_ERROR: "CART_ERROR",
 };
 
 export default actionsType;
